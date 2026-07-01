@@ -10,11 +10,23 @@
 </head>
 
 <body>
-  <div class="loader"><div class="loader-wrapper"><div class="loader-text">Loading...</div></div></div>
+  <div class="bg-loading-screen" aria-hidden="true">
+    <div class="bg-loader"></div>
+    <p>Loading background...</p>
+  </div>
+  <div class="weather-card">
+    <div class="weather-wrapper">
+      <div class="weather-icon">
+        <img src="https://cdn.meteocons.com/3.0.0-next.10/svg/fill/clear-day.svg" alt="Clear day" width="64" height="64" />
+      </div>
+      <div class="temp">--- °C</div>
+    </div>
+    <div class="description"></div>
+  </div>
   <div id="app">
     <div class="glass-card search">
       <div class="icon"></div>
-      <input type="text" class="searchbar">
+      <input type="text" class="searchbar" placeholder="Type something here...">
       <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
     </div>
   </div>
