@@ -22,6 +22,13 @@ body {
     z-index: 2;
 }
 
+.search-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(-80px);
+}
+
 .bg-loading-screen {
     position: fixed;
     inset: 0;
@@ -68,12 +75,37 @@ body.background-loaded .bg-loading-screen {
 }
 
 .search {
-    display: flex;
+    display: block;
     width: 60vw;
     background: white;
-    height: 60px;
     border-radius: 10px;
-    transform: translateY(-80px);
+}
+
+.search-row {
+    display: flex;
+    height: 60px;
+}
+
+.search-hints {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 60vw;
+    margin-top: 10px;
+}
+
+.hint-card {
+    padding: 7px 11px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.769);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    color: #000;
+    font-size: 11px;
+    line-height: 1;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .searchbar {
@@ -125,9 +157,8 @@ body.background-loaded .bg-loading-screen {
 
 .weather-card {
     position: absolute;
-    top: 3%;
-    right: -3%;
-    width: 240px;
+    top: 3vh;
+    right: 3vh;
     padding: 12px 14px;
     color: #ffffff;
     display: flex;
@@ -183,17 +214,4 @@ body.background-loaded .bg-loading-screen {
 /* make temp and description sit together when space allows */
 .weather-wrapper .temp {
     display: block;
-}
-
-@media (max-width: 640px) {
-    .weather-card {
-        right: 12px;
-        top: 6%;
-        width: 190px;
-        padding: 10px 12px;
-    }
-    .temp { font-size: 18px; }
-    .weather-icon { width: 56px; height: 56px; }
-    .weather-icon img { width: 40px; height: 40px; }
-    .description { font-size: 12px; }
 }
