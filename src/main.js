@@ -1,26 +1,47 @@
-const API_KEY = import.meta.env.VITE_NASA_API_KEY;
+const ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
-document.querySelector("#app").innerHTML = "<p>loading...</p>";
+async function getRandomBackground() {
+    const response = await fetch(
+        `https://api.unsplash.com/photos/random?query=nature&orientation=landscape`,
+        {
+            headers: {
+                Authorization: `Client-ID ${ACCESS_KEY}`,
+            },
+        }
+    );
 
-fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
-  .then((response) => response.json())
-  .then((data) => {
-    let media;
+    const data = await response.json();
 
-    if (data.media_type === "image") {
-      media = `<img src="${data.url}"/>`;
-    } else if (data.url.includes("youtube")) {
-        media = `<iframe src="${data.url}"></iframe>`;
-    } else {
-      media = `<video src="${data.url}" controls></video>`;
+    return data.urls.full;
+}
+
+document.querySelector('.loader').style.display = 'block';
+
+/*
+getRandomBackground().then((url) => {
+  document.body.style.backgroundImage = `url(${url}&w=1920&h=1080&fit=crop&q=80)`;
+});*/
+
+setTimeout(() => {
+    document.querySelector('.loader').style.display = 'none';
+}, 1000);
+
+function search() {
+    let query = document.querySelector("input.searchbar").value;
+
+    const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+
+    window.location.href = url;
+}
+
+document.querySelector(".search-icon").addEventListener('click', function (event) {
+    search();
+});
+
+document.querySelector("input.searchbar").addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+
+        search();
     }
-
-    document.querySelector("#app").innerHTML = `
-      <h1>${data.title}</h1>
-      ${media}
-      <p>${data.explanation}</p>
-    `;
-  })
-  .catch((err) => {
-    document.querySelector("#app").innerHTML = `<p>Error: ${err.message}</p>`;
-  });
+})
