@@ -1,0 +1,1 @@
+A custom new tab page.
